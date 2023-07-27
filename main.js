@@ -4,6 +4,8 @@ const penColorSelect = document.querySelector('.pen-color-select')
 const penSizeSelect = document.querySelector('.pen-size-select')
 const bgColorSelect = document.querySelector('.bg-color-select')
 const saveBtn = document.querySelector('.save-btn')
+const loadBtn = document.querySelector('.load-btn')
+const modalLoadDraws = document.querySelector('.modal')
 
 const ctx = canvas.getContext('2d')
 
@@ -28,9 +30,48 @@ const changeBgColor = (bgColor) => {
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 }
 
-const saveCanvas = () => {
-  let savedImageData = canvas.toDataURL();
+const saveCanvasToLocalStorage = () => {
+  const savedImageData = canvas.toDataURL();
+  const dateTmstmp = new Date()
+  const drawDate = `draw-${dateTmstmp.toLocaleDateString()}-${dateTmstmp.toLocaleTimeString()}`
+  console.log(drawDate, savedImageData)
+  localStorage.setItem(drawDate, savedImageData)
 }
+
+const loadCanvasFromLocalStorage = () => {
+  modalLoadDraws.textContent = ''
+  const lsKeys = Object.keys(localStorage)
+  const selectDraws = document.createElement('select')
+  selectDraws.setAttribute('class', 'btn')
+  const option0 = document.createElement('option')
+  option0.textContent = 'Choisissez un dessin'
+  option0.value = 0
+  selectDraws.appendChild(option0)
+  
+  for(key of lsKeys){
+    if(key.includes('draw')){
+      const option = document.createElement('option')
+      option.setAttribute('value', key)
+      option.textContent = key
+      selectDraws.appendChild(option)
+    }
+  }
+  selectDraws.value = 0
+  console.log(selectDraws.value)
+  selectDraws.addEventListener('change', (e) => {
+    e.preventDefault()
+    const imageData = localStorage.getItem(e.target.value)
+    const image = new Image()
+    image.onload = function(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.drawImage(image, 0, 0)
+    }
+    image.src = imageData
+    modalLoadDraws.style.display = 'none'
+  })
+  modalLoadDraws.append(selectDraws)
+  modalLoadDraws.style.display = 'block'
+} 
 
 // Gestionnaire pour les événements de souris et de toucher
 function handleStart(event) {
@@ -125,6 +166,15 @@ bgColorSelect.addEventListener('change', (e) => {
   console.log(e.target.value)
   bgColor = e.target.value
   changeBgColor(bgColor)
+})
+
+saveBtn.addEventListener('click', (e) => {
+  e.stopPropagation()
+  saveCanvasToLocalStorage()
+})
+
+loadBtn.addEventListener('click', () => {
+  loadCanvasFromLocalStorage()
 })
 
 // Ajouter les écouteurs d'événements pour le toucher

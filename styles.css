@@ -39,3 +39,13 @@
 .save-btn{
   background-color: skyblue;
 }
+
+.modal{
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ccc;
+  padding: 48px;
+}
