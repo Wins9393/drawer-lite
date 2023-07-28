@@ -1,3 +1,15 @@
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js')
+  .then(function(registration) {
+    // L'enregistrement a réussi
+    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+  }, function(err) {
+    // L'enregistrement a échoué :(
+    console.log('ServiceWorker registration failed: ', err);
+  });
+}
+
+
 const canvas = document.querySelector('#canvas')
 const mainBtn = document.querySelector('.reset-btn')
 const penColorSelect = document.querySelector('.pen-color-select')

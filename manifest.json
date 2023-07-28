@@ -1,0 +1,21 @@
+{
+  "name": "Drawer Lite",
+  "short_name": "Drawer",
+  "description": "Une petite app de dessin pour Skye, Milo et Gaïa",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/icon/Screenshot_2023-07-28-02-07-27-770_io.spck.jpg",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon/Screenshot_2023-07-28-02-07-27-770_io.spck.jpg",
+      "sizes": "128x128",
+      "type": "image/png"
+    }
+  ]
+}
