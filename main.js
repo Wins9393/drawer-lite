@@ -29,7 +29,7 @@ let lineColor = 'red'
 let bgColor = 'white'
 
 const clearCanvas = (context) => {
-  canvas.width = window.innerWidth;
+  canvas.width = window.innerWidth - 300;
   canvas.height = window.innerHeight - 128;
   
   ctx.clearRect(0, 0, canvas.width, canvas.height)
