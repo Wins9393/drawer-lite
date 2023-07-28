@@ -1,10 +1,11 @@
 var CACHE_NAME = 'my-app-cache';
 var urlsToCache = [
+  /*
   '/',
   '/index.html',
   '/styles.css',
   '/main.js',
-  // Ajoutez ici d'autres URLs à mettre en cache
+  */
 ];
 
 self.addEventListener('install', function(event) {

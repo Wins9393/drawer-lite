@@ -28,9 +28,10 @@ let lineWidth = 1;
 let lineColor = 'red'
 let bgColor = 'white'
 
-const clearCanvas = (context) => {
-  canvas.width = window.innerWidth - 300;
-  canvas.height = window.innerHeight - 128;
+const clearCanvas = (ctx) => {
+  canvas.width = window.innerWidth - 40;
+  canvas.height = window.innerHeight - 148;
+  console.log(canvas.width, canvas.height)
   
   ctx.clearRect(0, 0, canvas.width, canvas.height)
   ctx.fillStyle = 'white'
@@ -185,7 +186,8 @@ saveBtn.addEventListener('click', (e) => {
   saveCanvasToLocalStorage()
 })
 
-loadBtn.addEventListener('click', () => {
+loadBtn.addEventListener('click', (e) => {
+  e.stopPropagation()
   loadCanvasFromLocalStorage()
 })
 
@@ -193,8 +195,9 @@ loadBtn.addEventListener('click', () => {
 canvas.addEventListener('touchstart', handleStart);
 canvas.addEventListener('touchmove', handleMove);
 canvas.addEventListener('touchend', handleEnd);
-
-window.addEventListener('resize', clearCanvas);
+/*
+window.addEventListener('DOMContentLoaded', clearCanvas);
+*/
 
 
 clearCanvas(ctx)
